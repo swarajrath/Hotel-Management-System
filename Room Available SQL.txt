@@ -1,0 +1,19 @@
+SELECT
+    room.room_no
+FROM
+    room
+WHERE
+  room_type = 'Deluxe Room' AND
+  room.room_no not in 
+  (
+    SELECT
+      room_date.room_no
+    FROM
+      room_date
+    WHERE
+      (room_date.check_in<='2019-06-13' and room_date.check_out>='2019-06-13')
+      OR
+      (room_date.check_in<'2019-06-19' and room_date.check_out>='2019-06-19')
+      OR
+      (room_date.check_in>='2019-06-13' and room_date.check_out<'2019-06-19')
+   )
